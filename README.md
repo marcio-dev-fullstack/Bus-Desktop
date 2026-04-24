@@ -1,12 +1,11 @@
 # BusEscolar
 Sistema Inteligente de Monitoramento do Transporte Escolar
 
-![GitHub repo size](https://img.shields.io/github/repo-size/marcio-dev-fullstack/Bus-Desktop)
-![GitHub stars](https://img.shields.io/github/stars/marcio-dev-fullstack/Bus-Desktop?style=social)
-![GitHub forks](https://img.shields.io/github/forks/marcio-dev-fullstack/Bus-Desktop?style=social)
-![GitHub issues](https://img.shields.io/github/issues/marcio-dev-fullstack/Bus-Desktop)
-![GitHub license](https://img.shields.io/github/license/marcio-dev-fullstack/Bus-Desktop)
-![GitHub last commit](https://img.shields.io/github/last-commit/marcio-dev-fullstack/Bus-Desktop)
+![version](https://img.shields.io/badge/version-v1.1-blue)
+![status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
+![platform](https://img.shields.io/badge/platform-React%20Native-blue)
+![database](https://img.shields.io/badge/database-SQLite-orange)
+![security](https://img.shields.io/badge/security-AES--256-green)
 
 
 ---
