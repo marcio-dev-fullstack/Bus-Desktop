@@ -1,62 +1,75 @@
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'database/database_helper.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
-void main() async {
+// Importação das suas telas
+import 'screens/login_screen.dart';
+import 'screens/home_screen.dart';
+
+void main() {
+  // Inicialização obrigatória para garantir que o Flutter suba os plugins antes do app
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const BusApp());
+
+  // Configuração do SQLite para rodar nativamente no Windows
+  if (!kIsWeb && Platform.isWindows) {
+    sqfliteFfiInit();
+    databaseFactory = databaseFactoryFfi;
+  }
+
+  runApp(const MyApp());
 }
 
-class BusApp extends StatelessWidget {
-  const BusApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bus Desktop - SEMEC',
+      title: 'Monitoramento SEMEC - CDA',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
-      home: const MonitorScreen(),
-    );
-  }
-}
+      
+      // Definição da Identidade Visual Institucional
+      theme: ThemeData(
+        useMaterial3: true,
+        primaryColor: const Color(0xFF003366), // Azul Marinho Oficial
+        
+        // Paleta de cores global
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF003366),
+          primary: const Color(0xFF003366),
+          secondary: const Color(0xFF006633), // Verde SEMEC
+          surface: Colors.white,
+        ),
 
-class MonitorScreen extends StatelessWidget {
-  const MonitorScreen({super.key});
+        // Estilização padrão das AppBars
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF003366),
+          foregroundColor: Colors.white,
+          centerTitle: true,
+          elevation: 2,
+        ),
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Monitoramento Escolar - CDA'),
-        backgroundColor: Colors.blue[800],
-        foregroundColor: Colors.white,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Card(
-              elevation: 4,
-              child: ListTile(
-                leading: const Icon(Icons.bus_alert, color: Colors.blue, size: 40),
-                title: const Text('Status do Veículo'),
-                subtitle: const Text('Aguardando sinal de GPS...'),
-                trailing: const Text('OFFLINE', style: TextStyle(color: Colors.red)),
-              ),
+        // Estilização global de botões
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF003366),
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
             ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Center(child: Text('Mapa será carregado aqui')),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
+
+      // O App agora inicia obrigatoriamente pela tela de Login
+      home: const LoginScreen(),
+      
+      // Rotas nomeadas caso queira expandir a navegação depois
+      routes: {
+        '/home': (context) => const HomeScreen(),
+        '/login': (context) => const LoginScreen(),
+      },
     );
   }
 }

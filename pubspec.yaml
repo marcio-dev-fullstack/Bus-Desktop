@@ -1,10 +1,10 @@
 name: bus_desktop
-description: "Sistema de Monitoramento do Transporte Escolar - SEMEC"
+description: "Sistema de Monitoramento SEMEC - Conceicao do Araguaia"
 publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.11.0 <4.0.0'
+  sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -19,3 +19,23 @@ dependencies:
 
   # GPS para monitorar o ônibus
   geolocator: ^10.1.1
+  intl: ^0.19.0
+
+  # Geração de PDF e Impressão
+  pdf: ^3.10.8
+  printing: ^5.11.1
+
+  # Manipulação de Excel e Arquivos
+  excel: ^4.0.2
+  file_picker: ^8.0.0+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/brasao_cda.png
